@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 class ChangeDetector(object):
     """
     The basic interface for our change detectors, it will be the responsibility
@@ -30,9 +24,7 @@ class ChangeDetector(object):
         return self.triggered
 
 
-# In[ ]:
-
-
+    
 class Simulator(object):
     """
     A basic simulator which takes a set of generator objects
@@ -81,8 +73,6 @@ class Simulator(object):
         return root_mean_squared_error_loss(self._changepoints, self._detected_changepoints)
 
 
-# In[ ]:
-
 
 class ThreshDetector(object):
     
@@ -118,9 +108,6 @@ class ThreshDetector(object):
                 self._triggered = True
                 self.changepoint = self._N
         return self._triggered
-
-
-# In[ ]:
 
 
 class WindowedMonteCarloDetector(ChangeDetector):
