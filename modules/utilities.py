@@ -2,7 +2,6 @@
 import numpy as np
 
 
-
 def calc_min_interval(x, alpha):
     """Internal method to determine the minimum interval of
     a given width"""
