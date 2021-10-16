@@ -7,6 +7,7 @@ import pandas as pd
 import copy
 import random
 from generator import *
+from utilities import *
 
 
 def r_squared_error_loss(target_point, stop_point):
