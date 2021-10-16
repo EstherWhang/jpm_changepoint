@@ -151,3 +151,18 @@ class DriftingDistributionGenerator(Generator):
             return ((1.0 - beta) * self._dist1.rvs(**self._kwargs1)) + (beta * self._dist2.rvs(**self._kwargs2))
         else:
             return self._dist2.rvs(**self._kwargs2)
+
+
+#from the bayesian changepoint detection
+#https://github.com/hildensia/bayesian_changepoint_detection
+def generate_normal_time_series(num, minl=50, maxl=1000):
+    data = np.array([], dtype=np.float64)
+    partition = np.random.randint(minl, maxl, num)
+    for p in partition:
+        mean = np.random.randn()*10
+        var = np.random.randn()*1
+        if var < 0:
+            var = var * -1
+        tdata = np.random.normal(mean, var, p)
+        data = np.concatenate((data, tdata))
+    return data
