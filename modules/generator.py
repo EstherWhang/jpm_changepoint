@@ -1,5 +1,5 @@
 import numpy as np
-
+#testing
 class Generator(object):
     
     def __init__(self):
@@ -115,8 +115,7 @@ class DataBackedGenerator(Generator):
             self._idx += 1
             return self._vec[self._idx - 1]
         
-        
-# TODO: Exercise with group
+#
 class DriftingDistributionGenerator(Generator):
     """
     A generator which takes two distinct distributions and a changepoint and returns
