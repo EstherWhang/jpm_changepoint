@@ -1,38 +1,10 @@
 import math
-import scipy.stats as stats
 from collections import deque
 import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-import copy
 import random
-from generator import *
-
-
-def r_squared_error_loss(target_point, stop_point):
-    """
-    Returns the root squared error loss when given the target point and stop point.
-    target_point: The known point at which the signal changed.
-    stop_point: The point at which the algorithm deteremined a stop should be performed.
-    
-    Returns: Root squared error loss between the two values.
-    """
-    return math.sqrt((target_point - stop_point) ** 2)
-
-def root_mean_squared_error_loss(target_points, stop_points):
-    """
-    Returns the root mean squared error (RMSE) loss for a series of target values,
-    and actual selected values.
-    target_points: The known points at which the signal changed.
-    stop_points: The points at which the algorithm deteremined a stop should be performed.
-    
-    Returns: Root mean squared error between the two sets.
-    """
-    cumulative_loss = 0.0
-    for i in range(len(target_points)):
-        cumulative_loss += (target_points[i] - stop_points[i]) ** 2
-    return math.sqrt(cumulative_loss / (1.0 * len(target_points)))
-
+from gener import *
+from utilities import *
+from errorloss import *
 
 class ChangeDetector(object):
     """
@@ -58,56 +30,6 @@ class ChangeDetector(object):
                 self.triggered = True
         self._previous = datum
         return self.triggered
-
-
-    
-class Simulator(object):
-    """
-    A basic simulator which takes a set of generator objects
-    and a detector, running the detector against each generator
-    once and recording the results.
-    """
-    
-    def __init__(self, generators, detector, limit=1200):
-        self._generators = generators
-        self._detector = detector
-        self._changepoints = []
-        self._detected_changepoints = []
-        self._limit = limit
-        
-        for generator in self._generators:
-            self._changepoints.append(generator._changepoint)
-            
-    def plot(self, vals, changepoint, detected_changepoint, title):
-        plt.plot(vals)
-        plt.vlines(changepoint, max(vals) * 1.2, 1, color='black')
-        plt.vlines(detected_changepoint, max(vals), 1, color='red')
-        plt.title(title)
-        plt.show()
-        
-    def run(self, plot=False):
-        for generator in self._generators:
-            detector = copy.deepcopy(self._detector)
-            vals = []
-            
-            val = generator.get()
-            changed = detector.step(val)
-            vals.append(val)
-            
-            while not changed and len(vals) < self._limit:
-                val = generator.get()
-                vals.append(val)
-                changed = detector.step(val)
-            
-            if changed:
-                self._detected_changepoints.append(detector.changepoint)
-            else:
-                self._detected_changepoints.append(self._limit)
-            
-            if plot:
-                self.plot(vals, generator._changepoint, detector.changepoint, generator.__class__.__name__)
-        return root_mean_squared_error_loss(self._changepoints, self._detected_changepoints)
-
 
 
 class ThreshDetector(object):
@@ -172,6 +94,7 @@ class WindowedMonteCarloDetector(ChangeDetector):
             
             hdi_min, hdi_max = hdi(diffs, self._confidence)
             self._triggered = not between(0.0, hdi_min, hdi_max)
+            
             if self._triggered:
                 self.changepoint = self._N
         
