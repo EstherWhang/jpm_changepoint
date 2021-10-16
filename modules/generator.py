@@ -115,43 +115,6 @@ class DataBackedGenerator(Generator):
             self._idx += 1
             return self._vec[self._idx - 1]
         
-#
-class DriftingDistributionGenerator(Generator):
-    """
-    A generator which takes two distinct distributions and a changepoint and returns
-    random variates from the first distribution until it has reached the changepoint
-    where it linearly drifts to the second distribution.
-    
-    dist1:       A scipy.stats distribution for before changepoint.
-    kwargs1:     A map specifying loc and scale for dist1.
-    dist2:       A scipy.stats distribution for after changepoint.
-    kwargs2:     A map specifying loc and scale for dist2.
-    changepoint: The number of values to be generated before switching to dist2.
-    steps:       The number of steps to take in the drift.
-    """
-    
-    _position = 0
-    
-    def __init__(self, dist1, kwargs1, dist2, kwargs2, changepoint, steps):
-        self._dist1 = dist1
-        self._kwargs1 = kwargs1
-        self._dist2 = dist2
-        self._kwargs2 = kwargs2
-        self._changepoint = changepoint
-        self._steps = steps
-        
-        self._change_gradient = np.linspace(0, 1, self._steps)
-        
-    def get(self):
-        self._position += 1
-        if self._position <= self._changepoint:
-            return self._dist1.rvs(**self._kwargs1)
-        elif self._position > self._changepoint and self._position <= self._changepoint + self._steps:
-            beta = self._change_gradient[self._position - self._changepoint - 1]
-            return ((1.0 - beta) * self._dist1.rvs(**self._kwargs1)) + (beta * self._dist2.rvs(**self._kwargs2))
-        else:
-            return self._dist2.rvs(**self._kwargs2)
-
 
 #from the bayesian changepoint detection
 #https://github.com/hildensia/bayesian_changepoint_detection
