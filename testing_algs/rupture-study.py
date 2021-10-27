@@ -15,20 +15,26 @@ from modules.gauss_mixture import *
 
 
 #first: focusing on one chancepoint
-bkps = 25
+bkps = 50
 gen1 = ChangingDistributionGenerator(stats.norm, {"loc":4,"scale":1}, stats.norm, {"loc":10,"scale":3}, bkps)
-
-vals = np.zeros(100)
-for i in range(100):
+vals = np.zeros(1000)
+for i in range(1000):
     vals[i] = gen1.get()
-# piecewise constant data 
-n_samples, n_dims, sigma = 100, 1, 5
-n_bkps = 1  # number of breakpoints
-signal_c, bkps_c = rpt.pw_constant(n_samples, n_dims, n_bkps, noise_std=sigma)
+
+
+#bin seg for simple changing distribution model
+model = "l2"  # "l1", "rbf", "linear", "normal", "ar",...
+algo_bin = rpt.Binseg(model=model).fit(vals)
+result_c = algo_bin.predict(n_bkps=1)
+print("Result for Bin Seg: ", result_c )
+rpt.display(vals, [bkps, 1000], result_c)
+plt.show()
 
 #get the breakpoints by adding them up
 
 
+
+#adding gaussian mixture for testing breakpoint
 #mu_true = np.array([-1, 0, 1])
 #sigma_true = np.sqrt([0.3, 0.1, 0.25])
 #mixture_p = [0.3, 0.2, 0.5] 
