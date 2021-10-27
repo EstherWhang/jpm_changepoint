@@ -17,7 +17,7 @@ def gauss_mix_dist(z_0, mu_true, sigma_true, mixture_p):
   p_gauss_mix = p_1 + p_2 + p_3
   return p_gauss_mix
 
-def sample_gauss_mix(k, mu_true, sigma_true, cluster_sizes):
+def sample_gauss_mix(mu_true, sigma_true, cluster_sizes):
 #rejection sampling
   z = np.random.randn(1000)
   samples = []
@@ -30,4 +30,4 @@ def sample_gauss_mix(k, mu_true, sigma_true, cluster_sizes):
       samples.append(z_0)
       u.append(u_0)
       index.append(i)
-  return samples
+  return np.array(samples).reshape(-1,1)
