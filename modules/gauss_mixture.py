@@ -19,14 +19,15 @@ def gauss_mix_dist(z_0, mu_true, sigma_true, mixture_p):
 
 def sample_gauss_mix(k, mu_true, sigma_true, cluster_sizes):
 #rejection sampling
-    z = np.random.randn(1000)
-    samples = []
-    u = []
-    index = []
-    k = 3 #chose a number to scale normal to fit gaussian mixture, change it later
-    for i , z_0 in enumerate(z):
-        u_0 = np.random.random_sample()*k*norm.pdf(z_0, 0, 1)
-        if u_0 <= gauss_mix_dist(z_0, mu_true, sigma_true, cluster_sizes):
-            samples.append(z_0)
-            u.append(u_0)
-            index.append(i)
+  z = np.random.randn(1000)
+  samples = []
+  u = []
+  index = []
+  k = 3 #chose a number to scale normal to fit gaussian mixture, change it later
+  for i , z_0 in enumerate(z):
+    u_0 = np.random.random_sample()*k*norm.pdf(z_0, 0, 1)
+    if u_0 <= gauss_mix_dist(z_0, mu_true, sigma_true, cluster_sizes):
+      samples.append(z_0)
+      u.append(u_0)
+      index.append(i)
+  return samples

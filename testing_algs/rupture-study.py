@@ -1,5 +1,6 @@
 from modules.gener import *
 from modules.utilities import *
+from modules.gauss_mixture import *
 
 
 #todo: make a bunch of synthetic time series datasets and test rupture algorithms on them
