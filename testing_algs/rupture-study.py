@@ -14,15 +14,19 @@ from modules.utilities import *
 from modules.gauss_mixture import *
 
 
-#first: trying to break current dectectors: 
-gen1 = ChangingDistributionGenerator(stats.norm, {"loc":4,"scale":1}, stats.norm, {"loc":10,"scale":3},25)
+#first: focusing on one chancepoint
+bkps = 25
+gen1 = ChangingDistributionGenerator(stats.norm, {"loc":4,"scale":1}, stats.norm, {"loc":10,"scale":3}, bkps)
+
 vals = np.zeros(100)
 for i in range(100):
     vals[i] = gen1.get()
 # piecewise constant data 
 n_samples, n_dims, sigma = 100, 1, 5
-n_bkps = 4  # number of breakpoints
+n_bkps = 1  # number of breakpoints
 signal_c, bkps_c = rpt.pw_constant(n_samples, n_dims, n_bkps, noise_std=sigma)
+
+#get the breakpoints by adding them up
 
 
 #mu_true = np.array([-1, 0, 1])
