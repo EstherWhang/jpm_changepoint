@@ -31,3 +31,16 @@ bin_seg(signal, dates, model, changepoint_num = 0)
 bottom_up(signal, dates, model,  changepoint_num = 0)
 pelt(signal, dates, model) 
 window(signal, dates, model,  changepoint_num = 0)
+
+"""
+Known Break Point
+Binary Seg Breaks: ['2020-03-03']
+Bottom Up Breaks: ['2020-03-10']
+Dynamic Programming: ['2020-03-03']
+Window Breaks: ['2020-03-10']
+Unknown Break Point
+Binary Seg Breaks: ['2020-03-03']
+Bottom Up Breaks: ['2020-03-10']
+PELT: ['2020-02-25' '2020-03-05' '2020-03-09' '2020-03-18' '2020-03-24']
+Window Breaks: ['2020-02-25' '2020-03-10']
+"""
