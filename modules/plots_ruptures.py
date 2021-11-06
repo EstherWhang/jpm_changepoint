@@ -1,8 +1,6 @@
 #functions for testing breakpoints with rupture
 import ruptures as rpt
-import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 
 def plot_close(df, company_name, start, end):
     df_range = df.loc[(df['Date'] >= start) & (df['Date'] < end)]

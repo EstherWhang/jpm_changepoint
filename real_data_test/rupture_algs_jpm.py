@@ -1,9 +1,6 @@
 #JPM Stock
 import pandas as pd
-import ruptures as rpt
 import numpy as np
-import matplotlib.pyplot as plt
-
 from modules.plots_ruptures import *
 
 #import data
