@@ -47,6 +47,7 @@ def dyn_p(signal, dates, model, changepoint_num = 1): #number of changepoints ar
     print("Dynamic Programming: "+ str(dates[bkps[:-1]]))
 # show results
     rpt.show.display(signal, bkps)
+    plt.title("Dynamic Programming")
     plt.show()
 
 
@@ -63,7 +64,7 @@ def pelt(signal, dates, model, jump=1, min_size=2,beta=100 ):
     plt.show()
 
 def window(signal, dates, model, sigma = 5, changepoint_num = 1):
-    algo = rpt.Window(width=40, model=model).fit(signal)
+    algo = rpt.Window(width=10, model=model).fit(signal)
     bkps = 0
     if changepoint_num != 0: #we know the number of changepoints
       bkps = algo.predict(n_bkps=changepoint_num)
