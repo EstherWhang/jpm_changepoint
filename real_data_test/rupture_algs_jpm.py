@@ -1,7 +1,16 @@
 #JPM Stock
 import pandas as pd
 import numpy as np
-from modules.plots_ruptures import *
+
+# importing the sys module
+import sys        
+  
+# inserting the mod.py directory at 
+# position 1 in sys.path
+#SET UP INIT, for now update this for your path
+#CHANGE THE PATH IF YOU WANT THE SCRIPT TO WORK
+sys.path.insert(1, r'C:\Users\emw\Desktop\Cooper\Junior\breakthroughAI_jpmorgan\jpm_changepoint') 
+from customized_scripts.plots_ruptures import *
 
 #import data
 JPMorgan_df = pd.read_csv("https://github.com/EstherWhang/jpm_changepoint/raw/main/JPM.csv")

@@ -9,9 +9,9 @@ import sys
 # position 1 in sys.path
 #SET UP INIT, for now update this for your path
 sys.path.insert(1, r'C:\Users\emw\Desktop\Cooper\Junior\breakthroughAI_jpmorgan\jpm_changepoint')  
-from modules.gener import *
-from modules.utilities import *
-from modules.gauss_mixture import *
+from customized_scripts.gener import *
+from customized_scripts.utilities import *
+from customized_scripts.gauss_mixture import *
 
 
 #first: focusing on one chancepoint
