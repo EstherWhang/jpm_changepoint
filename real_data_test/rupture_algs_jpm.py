@@ -4,7 +4,6 @@ import numpy as np
 
 # importing the sys module
 import sys        
-  
 # inserting the mod.py directory at 
 # position 1 in sys.path
 #SET UP INIT, for now update this for your path
