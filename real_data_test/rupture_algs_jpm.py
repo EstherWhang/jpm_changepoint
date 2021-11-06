@@ -22,14 +22,12 @@ print("Known Break Point")
 bin_seg(signal, dates, model)
 bottom_up(signal, dates, model)
 dyn_p(signal, dates, model)
-model = "ar"
 window(signal, dates, model)
 
 print("Unknown Break Point")
 #note: since there is no artificial breakpoint, color change is the rupture's prediction
-model = "l2"
+
 bin_seg(signal, dates, model, changepoint_num = 0)
 bottom_up(signal, dates, model,  changepoint_num = 0)
 pelt(signal, dates, model) 
-model = "ar"
 window(signal, dates, model,  changepoint_num = 0)
