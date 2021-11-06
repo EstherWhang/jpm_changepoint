@@ -16,10 +16,15 @@ signal = np.array(JPMorgan_recent['Close'])
 dates = np.array(JPMorgan_recent['Date'])
 model = "l2"
 
-bin_seg(signal, dates, model,sigma = 1)
 
-bottom_up(signal, dates, model, sigma = 1)
+#known change point
+bin_seg(signal, dates, model)
+bottom_up(signal, dates, model)
+dyn_p(signal, dates, model)
+window(signal, dates, model)
 
-pelt(signal, dates, model, jump=1, min_size=2,beta=100 )
-
-window(signal, dates, model, sigma = 1)
+#note: since there is no artificial breakpoint, color change is the rupture's prediction
+bin_seg(signal, dates, model, changepoint_num = 0)
+bottom_up(signal, dates, model,  changepoint_num = 0)
+pelt(signal, dates, model) 
+window(signal, dates, model,  changepoint_num = 0)
