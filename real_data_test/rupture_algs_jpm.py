@@ -3,7 +3,9 @@ import pandas as pd
 import ruptures as rpt
 import numpy as np
 import matplotlib.pyplot as plt
-from plots_ruptures import *
+
+from modules.plots_ruptures import *
+
 #import data
 JPMorgan_df = pd.read_csv("https://github.com/EstherWhang/jpm_changepoint/raw/main/JPM.csv")
 print(JPMorgan_df.head())
