@@ -16,23 +16,22 @@ signal = np.array(JPMorgan_recent['Close'])
 dates = np.array(JPMorgan_recent['Date'])
 model = "l2"
 
-
 #known change point
-print("Known Break Point")
+print("-----------------------------------------------")
+print("---------------Known Break Point---------------")
 bin_seg(signal, dates, model)
 bottom_up(signal, dates, model)
 dyn_p(signal, dates, model)
 window(signal, dates, model)
 
-print("Unknown Break Point")
+print("-----------------------------------------------")
+print("--------------Unknown Break Point--------------")
 #note: since there is no artificial breakpoint, color change is the rupture's prediction
-
 bin_seg(signal, dates, model, changepoint_num = 0)
 bottom_up(signal, dates, model,  changepoint_num = 0)
 pelt(signal, dates, model) 
 window(signal, dates, model,  changepoint_num = 0)
-
-"""
+""" 
 Known Break Point
 Binary Seg Breaks: ['2020-03-03']
 Bottom Up Breaks: ['2020-03-10']
