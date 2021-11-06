@@ -14,7 +14,7 @@ def bin_seg(signal, dates, model, sigma = 5, changepoint_num = 1):
     #model = "l2"  # "l1", "rbf", "linear", "normal", "ar",...
     algo = rpt.Binseg(model=model).fit(signal)
     bkps = 0
-    if changepoint_num > 0: #we know the number of changepoints
+    if changepoint_num  != 0: #we know the number of changepoints
       bkps = algo.predict(n_bkps=changepoint_num)
     else: #means we don't know how many changepoints there are
       bkps = algo.predict(epsilon=3 * len(signal) * sigma ** 2)
@@ -28,7 +28,7 @@ def bottom_up(signal, dates, model, sigma = 5,changepoint_num = 1):
   #model = "l2"  # "l1", "rbf", "linear", "normal", "ar",...
     algo = rpt.BottomUp(model=model).fit(signal)
     bkps = 0
-    if changepoint_num > 0: #we know the number of changepoints
+    if changepoint_num  != 0: #we know the number of changepoints
       bkps = algo.predict(n_bkps=changepoint_num)
     else: #means we don't know how many changepoints there are
       bkps = algo.predict(epsilon=3 * len(signal) * sigma ** 2)
